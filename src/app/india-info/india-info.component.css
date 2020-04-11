@@ -1,0 +1,24 @@
+#panel{
+    background-color:blue
+}
+#formId{
+    margin-top: 2em;
+    margin-left: 6%;
+    margin-right: 6%;
+}
+.label{
+    margin-top: .1em;
+    font-size: xx-large;
+    font-family: monospace;
+    font-style: oblique;
+    margin-left: 19%;
+    padding-top: 2em;
+}
+ #details{
+    font-size: small;;
+} 
+#chartdiv {
+    height: 500px;
+    margin-left: 4em;
+  }
+  
