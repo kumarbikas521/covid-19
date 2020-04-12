@@ -17,7 +17,14 @@
     padding-top: 2em; 
 }
 .dailyConfirmedCaseGraph{
-
+    margin-left: 3em;    
+    font-family: monospace;
+    font-style: oblique; 
+}
+.stateWiseHeading {
+    margin-left: 4em;    
+    font-family: monospace;
+    font-style: oblique; 
 }
  #details{
     font-size: small;;
