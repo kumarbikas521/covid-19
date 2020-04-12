@@ -11,7 +11,7 @@
       <li>Total recovered - {{this.totalIndiaData.cases_time_series[this.totalIndiaData.cases_time_series.length - 1
         ].totalrecovered}}</li>
     </ul>
-  </div><br>
+  </div>
   <div class="row dailyConfirmedCaseGraph" style="font-size: x-large">
     <label for="dailyConfirmedCase">Daily confirmed case</label>
   </div>
@@ -19,10 +19,15 @@
     <div class="col-sm">
       <div id="chartdiv"></div>
     </div>
-
-
   </div>
-  <br><br><br>
+  <div class="row dailyConfirmedCaseGraph" style="font-size: x-large">
+      <label for="dailyConfirmedCase">Death (Red) and Recover (green) data</label>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <div id="chartdivDeath"></div>
+      </div>
+    </div>
   <div class="row stateWiseHeading">
     <label style="font-size: x-large" for="Heading"> State wise detailed information </label></div>
   <div class="row">
