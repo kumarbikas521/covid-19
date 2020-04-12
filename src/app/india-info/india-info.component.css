@@ -3,18 +3,18 @@
 }
 #formId{
     width: 100%;
-    margin-top: 2em;
+    margin-top: 0.5em;
     margin-left: 6%;
     margin-right: 6%;
 }
 .Heading1{
-    margin-top: .1em;
+    /* margin-top: .1em; */
     font-size: xx-large;
     font-family: monospace;
     font-style: oblique;
     /* text-align-last: center; */
      margin-left: 15%;
-    padding-top: 2em; 
+    padding-top: .5em; 
 }
 .dailyConfirmedCaseGraph{
     margin-left: 3em;    
@@ -25,6 +25,7 @@
     margin-left: 4em;    
     font-family: monospace;
     font-style: oblique; 
+    margin-top: -3.5em;
 }
  #details{
     font-size: small;;
@@ -33,4 +34,11 @@
     height: 500px;
     /*margin-left: 4em;*/
   }
-  
+  .list{
+    font-size: large;
+    padding: 1.5em;
+    font-size: large;
+    /* float: left; */
+    /* margin-left: -33em; */
+    margin-right: 9em;  
+  }
