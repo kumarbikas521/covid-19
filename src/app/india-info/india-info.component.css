@@ -2,17 +2,22 @@
     background-color:blue
 }
 #formId{
+    width: 100%;
     margin-top: 2em;
     margin-left: 6%;
     margin-right: 6%;
 }
-.label{
+.Heading1{
     margin-top: .1em;
     font-size: xx-large;
     font-family: monospace;
     font-style: oblique;
-    margin-left: 15%;
-    padding-top: 2em;
+    /* text-align-last: center; */
+     margin-left: 15%;
+    padding-top: 2em; 
+}
+.dailyConfirmedCaseGraph{
+
 }
  #details{
     font-size: small;;

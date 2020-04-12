@@ -1,24 +1,36 @@
-<div class="label">
-  <label for="Heading">Total number of cases in india
-    {{this.totalIndiaData.cases_time_series[this.totalIndiaData.cases_time_series.length - 1 ].totalconfirmed}}</label>
-</div><br><br><br>
-<div class="label" style="font-size: x-large">
-    <label  for="dailyConfirmedCase">Daily confirmed case</label>
+<div class="container">
+  <div class="row Heading1">
+    <label for="Heading1">Total number of cases in india
+      {{this.totalIndiaData.cases_time_series[this.totalIndiaData.cases_time_series.length - 1 ].totalconfirmed}}</label>
+  </div><br><br><br>
+  <div class="row dailyConfirmedCaseGraph" style="font-size: x-large">
+    <label for="dailyConfirmedCase">Daily confirmed case</label>
+  </div>
+  <div class="row">
+    <div class="col-sm">
+      <div id="chartdiv"></div>
+    </div>
+  
+    
+  </div>
+<br><br><br>
+<div class="row">
+  <label style="font-size: x-large" for="Heading"> State wise detailed information </label></div>
+<div class="row">
+  <form id="formId" [formGroup]="indiaInfoForm">
+    <mat-accordion>
+      <mat-expansion-panel id="panel" *ngFor="let stateData of totalIndiaData.statewise ; let i = index">
+        <mat-expansion-panel-header *ngIf="i!=0">
+          <mat-panel-title>
+            {{stateData.state}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ( {{stateData.confirmed}})
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-label id="details">&nbsp;&nbsp;&nbsp;Active : {{stateData.active}}</mat-label><br>
+        <mat-label id="details">&nbsp;&nbsp;&nbsp;deaths : {{stateData.deaths}}</mat-label><br>
+        <mat-label id="details">&nbsp;&nbsp;&nbsp;Recovered : {{stateData.recovered}}</mat-label><br>
+        <mat-label id="details">&nbsp;&nbsp;&nbsp;Updated On : {{stateData.lastupdatedtime}}</mat-label>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </form>
 </div>
-    <div id="chartdiv"></div><br><br><br>
-    <div ><label class="label" style="font-size: x-large" for="Heading" > State wise detailed information  </label></div>
-<form id="formId" [formGroup]="indiaInfoForm">
-  <mat-accordion>
-    <mat-expansion-panel id="panel" *ngFor="let stateData of totalIndiaData.statewise ; let i = index">
-      <mat-expansion-panel-header *ngIf="i!=0">
-        <mat-panel-title>
-          {{stateData.state}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ( {{stateData.confirmed}})
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <mat-label id="details">&nbsp;&nbsp;&nbsp;Active : {{stateData.active}}</mat-label><br>
-      <mat-label id="details">&nbsp;&nbsp;&nbsp;deaths : {{stateData.deaths}}</mat-label><br>
-      <mat-label id="details">&nbsp;&nbsp;&nbsp;Recovered : {{stateData.recovered}}</mat-label><br>
-      <mat-label id="details">&nbsp;&nbsp;&nbsp;Updated On : {{stateData.lastupdatedtime}}</mat-label>
-    </mat-expansion-panel>
-  </mat-accordion>
-</form>
+</div>

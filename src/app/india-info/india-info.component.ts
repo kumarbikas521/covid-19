@@ -67,59 +67,53 @@ export class IndiaInfoComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+
   }
   ngAfterViewInit() {
+
+    // Create chart instance
     const chart = am4core.create('chartdiv', am4charts.XYChart);
-    const label = chart.createChild(am4core.Label);
-    label.text = 'Date';
-    label.fontSize = 17;
-    label.align = 'center';
+   // chart.scrollbarX = new am4core.Scrollbar();
     chart.data = this.indiaDateWiseData;
-    chart.dateFormatter.inputDateFormat = 'yyyy-MM-dd';
-    const dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+    // Create axes
+    const categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+    categoryAxis.dataFields.category = 'date';
+    categoryAxis.renderer.grid.template.location = 0;
+    categoryAxis.renderer.minGridDistance = 30;
+    categoryAxis.renderer.labels.template.horizontalCenter = 'right';
+    categoryAxis.renderer.labels.template.verticalCenter = 'middle';
+    categoryAxis.renderer.labels.template.rotation = 270;
+    categoryAxis.tooltip.disabled = true;
+    categoryAxis.renderer.minHeight = 110;
+
     const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-    const series = chart.series.push(new am4charts.LineSeries());
+    valueAxis.renderer.minWidth = 50;
+
+    // Create series
+    const series = chart.series.push(new am4charts.ColumnSeries());
+    series.sequencedInterpolation = true;
     series.dataFields.valueY = 'value';
-    series.dataFields.dateX = 'date';
-    series.tooltipText = '{value}';
-    series.strokeWidth = 2;
-    series.minBulletDistance = 15;
+    series.dataFields.categoryX = 'date';
+    series.tooltipText = '[{categoryX}: bold]{valueY}[/]';
+    series.columns.template.strokeWidth = 0;
 
-    // Drop-shaped tooltips
-    series.tooltip.background.cornerRadius = 20;
-    series.tooltip.background.strokeOpacity = 0;
     series.tooltip.pointerOrientation = 'vertical';
-    series.tooltip.label.minWidth = 40;
-    series.tooltip.label.minHeight = 40;
-    series.tooltip.label.textAlign = 'middle';
-    series.tooltip.label.textValign = 'middle';
 
-    // Make bullets grow on hover
-    const bullet = series.bullets.push(new am4charts.CircleBullet());
-    bullet.circle.strokeWidth = 2;
-    bullet.circle.radius = 4;
-    bullet.circle.fill = am4core.color('#fff');
+    series.columns.template.column.cornerRadiusTopLeft = 10;
+    series.columns.template.column.cornerRadiusTopRight = 10;
+    series.columns.template.column.fillOpacity = 0.8;
 
-    const bullethover = bullet.states.create('hover');
-    bullethover.properties.scale = 1.3;
+    // on hover, make corner radiuses bigger
+    const hoverState = series.columns.template.column.states.create('hover');
+    hoverState.properties.cornerRadiusTopLeft = 0;
+    hoverState.properties.cornerRadiusTopRight = 0;
+    hoverState.properties.fillOpacity = 1;
 
-    // Make a panning cursor
+    series.columns.template.adapter.add('fill', (fill, target) => {
+      return chart.colors.getIndex(target.dataItem.index);
+    });
+
+    // Cursor
     chart.cursor = new am4charts.XYCursor();
-    // chart.cursor.behavior = 'panXY';
-    chart.cursor.xAxis = dateAxis;
-    chart.cursor.snapToSeries = series;
-
-    // Create vertical scrollbar and place it before the value axis
-    chart.scrollbarY = new am4core.Scrollbar();
-    chart.scrollbarY.parent = chart.leftAxesContainer;
-    chart.scrollbarY.toBack();
-
-    // Create a horizontal scrollbar with previe and place it underneath the date axis
-    chart.scrollbarX = new am4charts.XYChartScrollbar();
-    // chart.scrollbarX.series.push(series);
-    chart.scrollbarX.parent = chart.bottomAxesContainer;
-
-    // dateAxis.start = 0.79;
-    dateAxis.keepSelection = true;
   }
 }
