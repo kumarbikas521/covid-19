@@ -6,7 +6,7 @@ import * as URLs from '../../assets/URL.json';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-  URLs = URLs;
+  URLs: any = URLs;
   constructor() { }
 
   ngOnInit() {
