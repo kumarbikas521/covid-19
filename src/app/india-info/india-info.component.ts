@@ -146,6 +146,7 @@ export class IndiaInfoComponent implements OnInit, AfterViewInit {
 
     // Create series
     const series = chart.series.push(new am4charts.LineSeries());
+    series.name = 'Death';
     series.dataFields.valueY = 'death';
     series.dataFields.categoryX = 'date';
     series.strokeWidth = 2;
@@ -156,6 +157,7 @@ export class IndiaInfoComponent implements OnInit, AfterViewInit {
     bullet.tooltipText = '{valueY}';
 
     const series1 = chart.series.push(new am4charts.LineSeries());
+    series1.name = 'Recovered';
     series1.dataFields.valueY = 'recover';
     series1.dataFields.categoryX = 'date';
     series1.strokeWidth = 2;
@@ -165,7 +167,7 @@ export class IndiaInfoComponent implements OnInit, AfterViewInit {
     const bullet1 = series1.bullets.push(new am4charts.Bullet());
     bullet1.tooltipText = '{valueY}';
 
-
+    chart.legend = new am4charts.Legend();
 
 
     chart.cursor = new am4charts.XYCursor();
