@@ -76,8 +76,6 @@ export class IndiaInfoComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-
-
   }
   ngAfterViewInit() {
 
