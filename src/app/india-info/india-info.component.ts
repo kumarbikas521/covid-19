@@ -4,6 +4,7 @@ import { IndiaApiServiceService } from '../services/india-api-service.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { DatePipe } from '@angular/common';
 /* Imports */
+
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
@@ -42,16 +43,16 @@ export class IndiaInfoComponent implements OnInit, AfterViewInit {
     }],
     tested: []
   };
-  // @ViewChild(MatPaginator) paginator: MatPaginator;
   indiaDateWiseData = [];
   deathAndRecoverData = [];
   constructor(private indiaService: IndiaApiServiceService, private datepipe: DatePipe) {
     this.indiaInfoForm = new FormGroup({
     });
+
     this.indiaDateWiseData = [];
     this.deathAndRecoverData = [];
     this.indiaService.getIndiaData().subscribe((data) => {
-      console.log(data);
+      // console.log(data);
       this.totalIndiaData = data;
       console.log(data.cases_time_series[data.cases_time_series.length - 1].totalconfirmed);
       this.totalIndiaData.cases_time_series.forEach((ele) => {
@@ -69,7 +70,7 @@ export class IndiaInfoComponent implements OnInit, AfterViewInit {
         this.deathAndRecoverData.push(deathrecoverObj);
 
       });
-      console.log(this.indiaDateWiseData);
+     // console.log(this.indiaDateWiseData);
       this.ngAfterViewInit();
       this.plotDeathRecoverGraph();
     });
@@ -149,7 +150,7 @@ export class IndiaInfoComponent implements OnInit, AfterViewInit {
     series.dataFields.categoryX = 'date';
     series.strokeWidth = 2;
     series.tensionX = 0.77;
-    series.stroke  = am4core.color('#FF0000');
+    series.stroke = am4core.color('#FF0000');
     // bullet is added because we add tooltip to a bullet for it to change color
     const bullet = series.bullets.push(new am4charts.Bullet());
     bullet.tooltipText = '{valueY}';
@@ -160,7 +161,7 @@ export class IndiaInfoComponent implements OnInit, AfterViewInit {
     series1.dataFields.categoryX = 'date';
     series1.strokeWidth = 2;
     series1.tensionX = 0.77;
-    series1.stroke  = am4core.color('#00FF00');
+    series1.stroke = am4core.color('#00FF00');
     // bullet is added because we add tooltip to a bullet for it to change color
     const bullet1 = series1.bullets.push(new am4charts.Bullet());
     bullet1.tooltipText = '{valueY}';
