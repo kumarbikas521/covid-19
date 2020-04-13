@@ -1,5 +1,33 @@
 <div class="container">
-  <strong>
+
+  <div class="row tiles">
+    <div class="col-sm-6">
+      <div class="card bg-info text-red">
+        <div class="card-body">Total confirmed case - {{this.totalIndiaData.cases_time_series[this.totalIndiaData.cases_time_series.length -
+            1 ].totalconfirmed}}</div>
+      </div><br>
+    </div>
+    <div class="col-sm-6">
+      <div class="card bg-danger text-red">
+        <div class="card-body">Total death - {{this.totalIndiaData.cases_time_series[this.totalIndiaData.cases_time_series.length - 1
+            ].totaldeceased}}</div>
+      </div><br>
+    </div>
+    <div class="col-sm-6">
+      <div class="card bg-success text-red">
+        <div class="card-body">Total recovered - {{this.totalIndiaData.cases_time_series[this.totalIndiaData.cases_time_series.length - 1
+            ].totalrecovered}}</div>
+      </div><br>
+    </div>
+    <!-- <div class="col-sm-6">
+      <div class="card bg-danger text-red">
+        <div class="card-body">Primary card</div>
+      </div>
+    </div> -->
+  </div>
+
+
+  <!-- <strong>
     <h3 class="Heading1">Covid 19 pandemic tracker for India</h3>
   </strong>
   <div class="row list">
@@ -11,7 +39,7 @@
       <li>Total recovered - {{this.totalIndiaData.cases_time_series[this.totalIndiaData.cases_time_series.length - 1
         ].totalrecovered}}</li>
     </ul>
-  </div>
+  </div> -->
   <div class="row dailyConfirmedCaseGraph" style="font-size: x-large">
     <label for="dailyConfirmedCase">Daily confirmed case</label>
   </div>
@@ -21,13 +49,13 @@
     </div>
   </div>
   <div class="row dailyConfirmedCaseGraph" style="font-size: x-large">
-      <label for="dailyConfirmedCase">Death (Red) and Recover (green) data</label>
+    <label for="dailyConfirmedCase">Death (Red) and Recover (green) data</label>
+  </div>
+  <div class="row">
+    <div class="col-sm">
+      <div id="chartdivDeath"></div>
     </div>
-    <div class="row">
-      <div class="col-sm">
-        <div id="chartdivDeath"></div>
-      </div>
-    </div>
+  </div>
   <div class="row stateWiseHeading">
     <label style="font-size: x-large" for="Heading"> State wise detailed information </label></div>
   <div class="row">

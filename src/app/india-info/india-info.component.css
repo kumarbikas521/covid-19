@@ -44,3 +44,8 @@
     font-family: monospace;
     font-style: oblique;
   }
+  .tiles{
+    padding: 1em;
+    text-align: center;
+  }
+ 
