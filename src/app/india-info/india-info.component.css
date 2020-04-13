@@ -10,7 +10,9 @@
 }
 
 .dailyConfirmedCaseGraph{
-   /* margin-left: 3em; */   
+   /* margin-left: 3em; */  
+   text-align: center;
+   font-size: x-large ;
     font-family: monospace;
     font-style: oblique; 
 }

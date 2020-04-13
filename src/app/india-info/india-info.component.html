@@ -3,37 +3,40 @@
   <div class="row tiles">
     <div class="col-sm-6">
       <div class="card bg-info text-red">
-        <div class="card-body">Total confirmed case - {{this.totalIndiaData.cases_time_series[this.totalIndiaData.cases_time_series.length -
-            1 ].totalconfirmed}}</div>
+        <div class="card-body">Total confirmed case -
+          {{this.totalIndiaData.cases_time_series[this.totalIndiaData.cases_time_series.length -
+          1 ].totalconfirmed}}</div>
       </div><br>
     </div>
     <div class="col-sm-6">
       <div class="card bg-danger text-red">
-        <div class="card-body">Total death - {{this.totalIndiaData.cases_time_series[this.totalIndiaData.cases_time_series.length - 1
-            ].totaldeceased}}</div>
+        <div class="card-body">Total death -
+          {{this.totalIndiaData.cases_time_series[this.totalIndiaData.cases_time_series.length - 1
+          ].totaldeceased}}</div>
       </div><br>
     </div>
     <div class="col-sm-6">
       <div class="card bg-success text-red">
-        <div class="card-body">Total recovered - {{this.totalIndiaData.cases_time_series[this.totalIndiaData.cases_time_series.length - 1
-            ].totalrecovered}}</div>
+        <div class="card-body">Total recovered -
+          {{this.totalIndiaData.cases_time_series[this.totalIndiaData.cases_time_series.length - 1
+          ].totalrecovered}}</div>
       </div><br>
     </div>
 
   </div>
 
 
-  
-  <div class="row" style="font-size: x-large">
-    <label class="dailyConfirmedCaseGraph" for="dailyConfirmedCase">Daily confirmed case</label>
+
+  <div class="dailyConfirmedCaseGraph">
+    <div>Daily confirmed case</div>
   </div>
   <div class="row">
     <div class="col-sm">
       <div id="chartdiv"></div>
     </div>
   </div>
-  <div class="row dailyConfirmedCaseGraph" style="font-size: x-large">
-    <label for="dailyConfirmedCase">Death and Recover Graph</label>
+  <div class="dailyConfirmedCaseGraph">
+    <div>Death and Recover Graph</div>
   </div>
   <div class="row">
     <div class="col-sm">
