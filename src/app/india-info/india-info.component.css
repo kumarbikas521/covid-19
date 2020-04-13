@@ -2,27 +2,19 @@
     background-color:blue
 }
 #formId{
-    width: 100%;
-    margin-top: 0.5em;
+     width: 100%;
+   /* margin-top: 0.5em;
     margin-left: 6%;
-    margin-right: 6%;
+    margin-right: 6%; */
 }
-.Heading1{
-    /* margin-top: .1em; */
-    font-size: xx-large;
-    font-family: monospace;
-    font-style: oblique;
-    /* text-align-last: center; */
-    text-align: center;
-    padding-top: .5em; 
-}
+
 .dailyConfirmedCaseGraph{
-    margin-left: 3em;    
+   /* margin-left: 3em; */   
     font-family: monospace;
     font-style: oblique; 
 }
 .stateWiseHeading {
-    margin-left: 4em;    
+    /* margin-left: 4em;     */
     font-family: monospace;
     font-style: oblique; 
     margin-top: 1.5em;
@@ -40,12 +32,14 @@
   }
   .list{
     font-size: large;
-    padding: 1em;
+    /* padding: 1em; */
     font-family: monospace;
     font-style: oblique;
   }
   .tiles{
-    padding: 1em;
+    /* padding: 1em; */
+    width: 100%;
+    margin-top: 2em;
     text-align: center;
   }
  
