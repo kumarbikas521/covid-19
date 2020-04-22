@@ -43,35 +43,25 @@ export class IndiaInfoComponent implements OnInit, AfterViewInit {
     }],
     tested: []
   };
-  indiaDateWiseData = [];
-  deathAndRecoverData = [];
+  allIndiaData = [];
   constructor(private indiaService: IndiaApiServiceService, private datepipe: DatePipe) {
     this.indiaInfoForm = new FormGroup({
     });
-
-    this.indiaDateWiseData = [];
-    this.deathAndRecoverData = [];
+    this.allIndiaData = [];
     this.indiaService.getIndiaData().subscribe((data) => {
-      // console.log(data);
       this.totalIndiaData = data;
       console.log(data.cases_time_series[data.cases_time_series.length - 1].totalconfirmed);
       this.totalIndiaData.cases_time_series.forEach((ele) => {
-        // console.log( this.indiaDateWiseData);
-        const dateValue = {
-          date: this.datepipe.transform(new Date(ele.date + '2020'), 'yyyy-MM-dd'),
-          value: parseInt(ele.dailyconfirmed, 10)
-        };
         const deathrecoverObj = {
           date: this.datepipe.transform(new Date(ele.date + '2020'), 'yyyy-MM-dd'),
           death: parseInt(ele.dailydeceased, 10),
           recover: parseInt(ele.dailyrecovered, 10),
-          totalConfirmedCase: parseInt(ele.totalconfirmed, 10)
+          totalConfirmedCase: parseInt(ele.totalconfirmed, 10),
+          dailyconfirmedCase: parseInt(ele.dailyconfirmed, 10)
         };
-        this.indiaDateWiseData.push(dateValue);
-        this.deathAndRecoverData.push(deathrecoverObj);
+        this.allIndiaData.push(deathrecoverObj);
 
       });
-      // console.log(this.indiaDateWiseData);
       this.ngAfterViewInit();
       this.plotDeathRecoverGraph();
     });
@@ -84,7 +74,7 @@ export class IndiaInfoComponent implements OnInit, AfterViewInit {
     // Create chart instance
     const chart = am4core.create('chartdiv', am4charts.XYChart);
     // chart.scrollbarX = new am4core.Scrollbar();
-    chart.data = this.indiaDateWiseData;
+    chart.data = this.allIndiaData;
     // Create axes
     const categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.dataFields.category = 'date';
@@ -96,39 +86,37 @@ export class IndiaInfoComponent implements OnInit, AfterViewInit {
     categoryAxis.tooltip.disabled = true;
     categoryAxis.renderer.minHeight = 110;
 
+    // Create value axis
     const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-    valueAxis.renderer.minWidth = 50;
-
-    // Create series
-    const series = chart.series.push(new am4charts.ColumnSeries());
-    series.sequencedInterpolation = true;
-    series.dataFields.valueY = 'value';
-    series.dataFields.categoryX = 'date';
-    series.tooltipText = '[{categoryX}: bold]{valueY}[/]';
-    series.columns.template.strokeWidth = 0;
-
-    series.tooltip.pointerOrientation = 'vertical';
-
-    series.columns.template.column.cornerRadiusTopLeft = 10;
-    series.columns.template.column.cornerRadiusTopRight = 10;
-    series.columns.template.column.fillOpacity = 0.8;
-
-    // on hover, make corner radiuses bigger
-    const hoverState = series.columns.template.column.states.create('hover');
-    hoverState.properties.cornerRadiusTopLeft = 0;
-    hoverState.properties.cornerRadiusTopRight = 0;
-    hoverState.properties.fillOpacity = 1;
-
-    series.columns.template.adapter.add('fill', (fill, target) => {
-      return chart.colors.getIndex(target.dataItem.index);
-    });
+    valueAxis.baseValue = 0;
+    const series1 = chart.series.push(new am4charts.LineSeries());
+    series1.name = 'Daily confirmed case';
+    series1.dataFields.valueY = 'dailyconfirmedCase';
+    series1.dataFields.categoryX = 'date';
+    series1.strokeWidth = 2;
+    series1.tensionX = 0.77;
+    series1.stroke = am4core.color('#FF8C00');
+    // bullet is added because we add tooltip to a bullet for it to change color
+    const bullet1 = series1.bullets.push(new am4charts.Bullet());
+    bullet1.tooltipText = '{valueY}';
+    const series2 = chart.series.push(new am4charts.LineSeries());
+    series2.name = 'Total confirmed case';
+    series2.dataFields.valueY = 'totalConfirmedCase';
+    series2.dataFields.categoryX = 'date';
+    series2.strokeWidth = 2;
+    series2.tensionX = 0.77;
+    series2.stroke = am4core.color('#A52A2A');
+    // bullet is added because we add tooltip to a bullet for it to change color
+    const bullet2 = series2.bullets.push(new am4charts.Bullet());
+    bullet2.tooltipText = '{valueY}';
+    chart.legend = new am4charts.Legend();
 
     // Cursor
     chart.cursor = new am4charts.XYCursor();
   }
   plotDeathRecoverGraph() {
     const chart = am4core.create('chartdivDeath', am4charts.XYChart);
-    chart.data = this.deathAndRecoverData;
+    chart.data = this.allIndiaData;
     // Create axes
     const categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.dataFields.category = 'date';
@@ -166,17 +154,6 @@ export class IndiaInfoComponent implements OnInit, AfterViewInit {
     // bullet is added because we add tooltip to a bullet for it to change color
     const bullet1 = series1.bullets.push(new am4charts.Bullet());
     bullet1.tooltipText = '{valueY}';
-
-    const series2 = chart.series.push(new am4charts.LineSeries());
-    series2.name = 'Confirmed case';
-    series2.dataFields.valueY = 'totalConfirmedCase';
-    series2.dataFields.categoryX = 'date';
-    series2.strokeWidth = 2;
-    series2.tensionX = 0.77;
-    series2.stroke = am4core.color('#fefe33');
-    // bullet is added because we add tooltip to a bullet for it to change color
-    const bullet2 = series2.bullets.push(new am4charts.Bullet());
-    bullet2.tooltipText = '{valueY}';
 
     chart.legend = new am4charts.Legend();
 
