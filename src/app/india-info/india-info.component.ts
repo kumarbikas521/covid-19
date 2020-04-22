@@ -64,13 +64,14 @@ export class IndiaInfoComponent implements OnInit, AfterViewInit {
         const deathrecoverObj = {
           date: this.datepipe.transform(new Date(ele.date + '2020'), 'yyyy-MM-dd'),
           death: parseInt(ele.dailydeceased, 10),
-          recover: parseInt(ele.dailyrecovered, 10)
+          recover: parseInt(ele.dailyrecovered, 10),
+          totalConfirmedCase: parseInt(ele.totalconfirmed, 10)
         };
         this.indiaDateWiseData.push(dateValue);
         this.deathAndRecoverData.push(deathrecoverObj);
 
       });
-     // console.log(this.indiaDateWiseData);
+      // console.log(this.indiaDateWiseData);
       this.ngAfterViewInit();
       this.plotDeathRecoverGraph();
     });
@@ -165,6 +166,17 @@ export class IndiaInfoComponent implements OnInit, AfterViewInit {
     // bullet is added because we add tooltip to a bullet for it to change color
     const bullet1 = series1.bullets.push(new am4charts.Bullet());
     bullet1.tooltipText = '{valueY}';
+
+    const series2 = chart.series.push(new am4charts.LineSeries());
+    series2.name = 'Confirmed case';
+    series2.dataFields.valueY = 'totalConfirmedCase';
+    series2.dataFields.categoryX = 'date';
+    series2.strokeWidth = 2;
+    series2.tensionX = 0.77;
+    series2.stroke = am4core.color('#fefe33');
+    // bullet is added because we add tooltip to a bullet for it to change color
+    const bullet2 = series2.bullets.push(new am4charts.Bullet());
+    bullet2.tooltipText = '{valueY}';
 
     chart.legend = new am4charts.Legend();
 
