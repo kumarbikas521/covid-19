@@ -45,4 +45,8 @@
     margin-top: 2em;
     text-align: center;
   }
- 
+  .spinner {
+    position: absolute; /* or absolute */
+    top: 50%;
+    left: 50%;
+  }

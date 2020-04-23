@@ -19,6 +19,8 @@ am4core.useTheme(am4themes_animated);
 })
 export class IndiaInfoComponent implements OnInit, AfterViewInit {
   indiaInfoForm;
+  isSpinner = true;
+  opacity = .5;
   totalIndiaData = {
     cases_time_series: [{
       dailyconfirmed: '',
@@ -44,6 +46,7 @@ export class IndiaInfoComponent implements OnInit, AfterViewInit {
     tested: []
   };
   allIndiaData = [];
+
   constructor(private indiaService: IndiaApiServiceService, private datepipe: DatePipe) {
     this.indiaInfoForm = new FormGroup({
     });
@@ -60,7 +63,7 @@ export class IndiaInfoComponent implements OnInit, AfterViewInit {
           dailyconfirmedCase: parseInt(ele.dailyconfirmed, 10)
         };
         this.allIndiaData.push(deathrecoverObj);
-
+        this.isSpinner = false;
       });
       this.ngAfterViewInit();
       this.plotDeathRecoverGraph();
@@ -68,6 +71,9 @@ export class IndiaInfoComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    /*const elem = (document.getElementById('container')) as HTMLDivElement;
+    console.log(elem);
+    elem.style.opacity = '.3';*/
   }
   ngAfterViewInit() {
 
